@@ -2,6 +2,29 @@
 Self-Driving Car Engineer Nanodegree Program
 
 ---
+## Introduction
+
+A proportional–integral–derivative controller (PID) is a control loop feedback mechanism widely used in control systems and a variety of other applications. A PID controller continuously calculates an error value as the difference between a desired setpoint and a measured process variable and applies a correction based on proportional, integral, and derivative terms (denoted P, I, and D respectively) which give the controller its name.
+
+The error(corss-track erro cte) is derived from the car simulator, it's the difference between actual position of the car and a refence trajectory.
+
+cte = desired_state - measured_state
+
+## PID components effect
+
+* The P (proportional) component:
+  * It is the most influential component on the behavior of the vehicle. 
+  * It's the opposite to the cte. (If the cte is to the right, a left steering command is given, and vice-versa.)
+* The I (integral) component:
+  * It takes into account the integral of cte over the past time period. It corrects systematic bias and constant deviation which can prevent the controller from reaching the center of the reference trajectory, for example, if a zero steering angle does not map to a straight line steering
+* The I (differential) component:
+  * It is proportional to the rate of change of cte, and is used to reduce oscillations and overshooting caused by the proportional component.
+  
+## Hyperparameter tuning
+
+Parameter tuning was manually done due to the fact that the slightest parameter error caused the vehicle to tip off the track curb causing an unrecoverable crash. Tuning started with a P-only controller. After settling for the K_p value that kept the car within the track, a gradual increase in K_d was the next most sensible step. K_d was increased until oscillations and overshoot were deminished. The effect of K_i was negligible in this application since the steering drift is very small in the simulator.
+
+A P-only controller was also implemented for the throttle. It helped reaching the highest possible speeds through the track, while at the same time limiting the vehicle speed in hard turns where cte increased noticebly.
 
 ## Dependencies
 
